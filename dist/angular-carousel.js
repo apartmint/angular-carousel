@@ -326,6 +326,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
                     function scroll(x) {
                         // use CSS 3D transform to move the carousel
+                        getCarouselWidth();
                         if (isNaN(x)) {
                             x = scope.carouselIndex * containerWidth;
                         }
@@ -384,6 +385,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                     }
 
                     function goToSlide(i, animate) {
+                        getCarouselWidth();
                         if (isNaN(i)) {
                             i = scope.carouselIndex;
                         }
