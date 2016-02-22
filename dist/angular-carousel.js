@@ -391,7 +391,6 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                     }
 
                     function goToSlide(i, animate) {
-                        console.log('goToSlide', i, animate);//felipe
                         if (isNaN(i)) {
                             i = scope.carouselIndex;
                         }
