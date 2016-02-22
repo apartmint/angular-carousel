@@ -248,7 +248,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                     }
 
                     scope.carouselBufferIndex = 0;
-                    scope.carouselBufferSize = 5;
+                    scope.carouselBufferSize = 12;
                     scope.carouselIndex = 0;
 
                     // handle index databinding
