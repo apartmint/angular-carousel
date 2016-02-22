@@ -226,6 +226,11 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                         animOnIndexChange = false;
                     }
 
+                    var defaultSlideWidth = null;
+                    if (angular.isDefined(iAttributes.rnCarouselDefaultSlideWidth)) {
+                        defaultSlideWidth = parseInt(iAttributes.rnCarouselDefaultSlideWidth);
+                    }
+
                     scope.$watch('carouselExposedIndex', function(newValue) {
                         goToSlide(newValue, true);
                     });
@@ -310,8 +315,10 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                             containerWidth = carousel[0].getBoundingClientRect().width;
                         } else {
                             containerWidth = slides[0].getBoundingClientRect().width;
+                            if (containerWidth === 0 && defaultSlideWidth) {
+                                containerWidth = defaultSlideWidth;
+                            }
                         }
-                        // console.log('getCarouselWidth', containerWidth);
                         return containerWidth;
                     }
 
@@ -384,6 +391,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                     }
 
                     function goToSlide(i, animate) {
+                        console.log('goToSlide', i, animate);//felipe
                         if (isNaN(i)) {
                             i = scope.carouselIndex;
                         }
