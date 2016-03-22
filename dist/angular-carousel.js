@@ -95,7 +95,7 @@ angular.module('angular-carousel')
 
 angular.module('angular-carousel').run(['$templateCache', function($templateCache) {
   $templateCache.put('carousel-controls.html',
-    '<div class="rn-carousel-controls">\n' +
+    '<div class="rn-carousel-controls" mn-touch swipe-right="prev()" swipe-left="next()">\n' +
     '  <span class="rn-carousel-control rn-carousel-control-prev" ng-click="prev();$event.stopPropagation();" ng-if="items.length > 1 && (index > 0  || loop)"></span>\n' +
     '  <span class="rn-carousel-control rn-carousel-control-next" ng-click="next();$event.stopPropagation();" ng-if="items.length > 1 && (index < items.length - 1 || loop)"></span>\n' +
     '</div>'
