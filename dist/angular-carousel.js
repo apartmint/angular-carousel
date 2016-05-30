@@ -390,7 +390,19 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                         scope.carouselBufferIndex = bufferIndex;
                     }
 
+                    /*
+                     * If seamless loop is enabled wait 5 cycles and start with slide No 2
+                     * else use default logic
+                     */
+                    var firstLoad = iAttributes.rnCarouselIndex ? false : true;
+                    var firstLoadCounter = 0;
                     function goToSlide(i, animate) {
+                        if (angular.isDefined(tAttributes['rnCarouselSeamlessLoop']) && firstLoad && ((angular.isDefined(tAttributes['rnCarouselBuffered']) && firstLoadCounter === 3) || (!angular.isDefined(tAttributes['rnCarouselBuffered']) && firstLoadCounter === 4))) {
+                            i = 1;
+                            scope.carouselIndex = 1;
+                            firstLoad = false;
+                        }
+                        firstLoadCounter++;
                         if (isNaN(i)) {
                             i = scope.carouselIndex;
                         }
@@ -413,6 +425,15 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
                             }
                         }
                         scroll();
+
+                        if (angular.isDefined(tAttributes['rnCarouselSeamlessLoop']) && !firstLoad) {
+                            if (scope.carouselIndex == 0 && i == 0) {
+                                goToSlide(slidesCount - 2);
+                            }
+                            if (scope.carouselIndex == slidesCount - 1 && i == slidesCount - 1) {
+                                goToSlide(1);
+                            }
+                        }
                     }
 
                     function getAbsMoveTreshold() {
